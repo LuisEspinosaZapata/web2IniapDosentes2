@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>📞 Contactos — Asociación de Ayuda Económica y Social INIAP</h1>
+
+  <!-- Formulario -->
+  <div class="card">
+    <form #f="ngForm" (ngSubmit)="submit(f)">
+      <div class="row">
+        <input name="nombre" [(ngModel)]="model.nombre" required placeholder="Nombre *" />
+        <input name="apellido" [(ngModel)]="model.apellido" placeholder="Apellido" />
+      </div>
+
+      <div class="row">
+        <input name="email" [(ngModel)]="model.email" required email placeholder="Email *" />
+        <input name="telefono" [(ngModel)]="model.telefono" placeholder="Teléfono" />
+      </div>
+
+      <div class="row">
+        <select name="programa" [(ngModel)]="model.programa" required>
+          <option value="">Seleccionar programa</option>
+          <option value="Apoyo Económico">Apoyo Económico</option>
+          <option value="Capacitación">Capacitación</option>
+          <option value="Proyectos Comunitarios">Proyectos Comunitarios</option>
+        </select>
+        <input name="mensaje" [(ngModel)]="model.mensaje" placeholder="Mensaje o solicitud" />
+      </div>
+
+      <div class="actions">
+        <button type="submit" [disabled]="f.invalid">{{ editMode ? 'Actualizar' : 'Enviar' }}</button>
+        <button type="button" (click)="cancelEdit()">Limpiar</button>
+      </div>
+    </form>
+  </div>

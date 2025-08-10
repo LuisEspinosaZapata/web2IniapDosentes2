@@ -1,0 +1,108 @@
+<form (ngSubmit)="guardar(formulario)" #formulario="ngForm" class="formulario">
+  <h2>Registro de Usuarios</h2>
+
+  <input
+    type="text"
+    placeholder="Cédula"
+    name="cedula"
+    [(ngModel)]="cedula"
+    required
+  />
+
+  <input
+    type="text"
+    placeholder="Nombre"
+    name="nombre"
+    [(ngModel)]="nombre"
+    required
+  />
+
+  <input
+    type="text"
+    placeholder="Apellidos"
+    name="apellidos"
+    [(ngModel)]="apellidos"
+    required
+  />
+
+  <input
+    type="email"
+    placeholder="Email"
+    name="email"
+    [(ngModel)]="email"
+    required
+  />
+
+  <input
+    type="tel"
+    placeholder="Teléfono"
+    name="telefono"
+    [(ngModel)]="telefono"
+    required
+  />
+
+  <select
+    name="genero"
+    [(ngModel)]="genero"
+    required
+  >
+    <option value="" disabled selected>Seleccione género</option>
+    <option value="hombre">Hombre</option>
+    <option value="mujer">Mujer</option>
+  </select>
+
+  <input
+    type="date"
+    placeholder="Fecha de nacimiento"
+    name="fechaNacimiento"
+    [(ngModel)]="fechaNacimiento"
+    required
+  />
+
+  <input
+    type="password"
+    placeholder="Contraseña"
+    name="contrasena"
+    [(ngModel)]="contrasena"
+    required
+    minlength="6"
+  />
+
+  <div class="botones">
+    <button type="submit">{{ id ? 'Actualizar' : 'Enviar' }}</button>
+    <button type="button" (click)="limpiarFormulario(formulario)">Limpiar</button>
+  </div>
+</form>
+
+<table class="tabla-usuarios">
+  <thead>
+    <tr>
+      <th>Cédula</th>
+      <th>Nombre</th>
+      <th>Apellidos</th>
+      <th>Email</th>
+      <th>Teléfono</th>
+      <th>Género</th>
+      <th>Fecha Nac.</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let usu of usuarios">
+      <td>{{ usu.cedula }}</td>
+      <td>{{ usu.nombre }}</td>
+      <td>{{ usu.apellidos }}</td>
+      <td>{{ usu.email }}</td>
+      <td>{{ usu.telefono }}</td>
+      <td class="capitalize">{{ usu.genero }}</td>
+      <td>{{ usu.fechaNacimiento | date:'dd/MM/yyyy' }}</td>
+      <td class="acciones">
+        <button (click)="editarUsuario(usu)" class="btn-editar" aria-label="Editar usuario">Editar</button>
+        <button (click)="eliminarUsuario(usu.id)" class="btn-eliminar" aria-label="Eliminar usuario">Eliminar</button>
+      </td>
+    </tr>
+    <tr *ngIf="usuarios.length === 0">
+      <td colspan="8" class="no-registros">No hay usuarios registrados.</td>
+    </tr>
+  </tbody>
+</table>
